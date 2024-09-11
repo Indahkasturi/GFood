@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Discount pelanggan baru",
+        "discount":12
+    },
+    {
+        "name": "Discount umur 24",
+        "discount":23
+    }
+]

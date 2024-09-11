@@ -1,0 +1,26 @@
+[
+    {
+        "name": "nasi goreng",
+        "price": 20000,
+        "imageURL": "https://www.blibli.com/friends-backend/wp-content/uploads/2023/04/B300026-Cover-resep-nasi-goreng-scaled.jpg",
+        "UserId": 1
+    },
+    {
+        "name": "burger",
+        "price": 15000,
+        "imageURL": "https://asset.kompas.com/crops/fP_Q5TD9BOn5G5JTnntgtDIjQMI=/53x36:933x623/750x500/data/photo/2021/10/21/6171492e1ea12.jpg",
+        "UserId": 3
+    },
+    {
+        "name": "siomay",
+        "price": 15000,
+        "imageURL": "https://asset.kompas.com/crops/fP_Q5TD9BOn5G5JTnntgtDIjQMI=/53x36:933x623/750x500/data/photo/2021/10/21/6171492e1ea12.jpg",
+        "UserId": 1
+    },
+    {
+        "name": "kentang goreng",
+        "price": 15000,
+        "imageURL": "https://asset.kompas.com/crops/3_pP4G38V1ulz1HVZJuCZv0Cjy8=/0x2:880x588/750x500/data/photo/2022/09/14/632159cd811f2.jpg",
+        "UserId": 3
+    }
+]

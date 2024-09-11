@@ -1,0 +1,26 @@
+[
+    {
+      "name": "saya",
+      "address": "Jakarta Barat",
+      "age": 20,
+      "UserId": 1
+    },
+    {
+        "name": "anda",
+        "address": "Jakarta Timur",
+        "age": 22,
+        "UserId": 2
+      },
+      {
+        "name": "kamu",
+        "address": "Jakarta selatan",
+        "age": 18,
+        "UserId": 3
+      },
+      {
+        "name": "kita",
+        "address": "Jakarta Utara",
+        "age": 30,
+        "UserId": 3
+      }
+]

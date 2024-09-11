@@ -1,0 +1,22 @@
+[
+    {
+      "email": "Babagugus@gmail.com",
+      "password": "SayaCakep",
+      "role": "Admin"
+    },
+    {
+        "email": "naomi@gmail.com",
+        "password": "123456",
+        "role": "User"
+      },
+      {
+        "email": "luffy123@gmail.com",
+        "password": "654321",
+        "role": "User"
+      },
+      {
+        "email": "hito98@gmail.com",
+        "password": "hitohito",
+        "role": "Admin"
+      }
+]
