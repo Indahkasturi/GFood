@@ -23,16 +23,18 @@ class Controller {
     // *START Register
     static async formRegister(req, res) {
         try {
-            res.send('Nama File view nya formRegister')
-            // res.render('formRegister')
+            // res.send('Nama File view nya formRegister')
+            res.render('register')
         } catch (error) {
             res.send(error.message)
         }
     }
     static async postRegister(req, res) {
         try {
-            res.send('Nama File view nya formRegister')
-            // res.redirect('/login')
+            let { email, password, name, address, age } = req.body;
+            await User.create({ email, password })
+            await Profile.create({ name, address, age });
+            res.redirect('/login')
         } catch (error) {
             res.send(error.message)
         }
