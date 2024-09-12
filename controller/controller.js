@@ -1,4 +1,4 @@
-const { User, Profile, Product } = require("../models/index")
+const { User, Profile, Product, UserOrder } = require("../models/index")
 const { Op } = require('sequelize')
 
 
@@ -13,8 +13,8 @@ class Controller {
 
     static async formLogin(req, res) {
         try {
-            res.send('Nama File view nya formLogin')
-            // res.render('formLogin')
+            // res.send('Nama File view nya formLogin')
+            res.render('login')
         } catch (error) {
             res.send(error.message)
         }
@@ -43,7 +43,7 @@ class Controller {
     //* START Bagian Product
     static async products(req, res) {
         try {
-            res.send('Nama File view nya products')
+            res.send('Nama nya products')
             // res.render('products')
         } catch (error) {
             res.send(error.message)
