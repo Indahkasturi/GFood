@@ -31,8 +31,8 @@ class Controller {
     }
     static async postRegister(req, res) {
         try {
-            let { email, password, name, address, age } = req.body;
-            await User.create({ email, password })
+            let { email, password, name, address, age, role} = req.body;
+            await User.create({ email, password, role })
             await Profile.create({ name, address, age });
             res.redirect('/login')
         } catch (error) {
@@ -45,15 +45,16 @@ class Controller {
     //* START Bagian Product
     static async products(req, res) {
         try {
-            res.send('Nama nya products')
-            // res.render('products')
+            let data = await Product.findAll()
+ 
+            res.render('products', { data })
         } catch (error) {
             res.send(error.message)
         }
     }
     static async formAddProduct(req, res) {
         try {
-            res.send('Nama File view nya formAddProducts')
+            res.render('addProduct')
             // res.render('formAddProducts')
         } catch (error) {
             res.send(error.message)
@@ -61,7 +62,9 @@ class Controller {
     }
     static async postAddProduct(req, res) {
         try {
-            res.send(' Redirect ke "/products" ')
+            const { name, price, imageURL} = req.body
+            await Product.create({name, price, imageURL})
+            res.redirect('/products')
             // res.render('formAddProducts')
         } catch (error) {
             res.send(error.message)
@@ -115,7 +118,7 @@ class Controller {
     }
     static async deleteOrder(req, res) {
         try {
-            res.send('Render ke "cart" ')
+            // res.send('Render ke "cart" ')
             // res.render('cart', {})
         } catch (error) {
             res.send(error.message)
