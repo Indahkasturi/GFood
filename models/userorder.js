@@ -14,10 +14,27 @@ module.exports = (sequelize, DataTypes) => {
       UserOrder.belongsTo(models.User)
       UserOrder.belongsTo(models.Product)
     }
+    
   }
   UserOrder.init({
-    UserId: DataTypes.INTEGER,
-    ProductId: DataTypes.INTEGER,
+    UserId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: {
+          tableName: 'Users'
+        },
+        key: 'id'
+      }
+    },
+    ProductId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: {
+          tableName: 'Products'
+        },
+        key: 'id'
+      }
+    },
     quantity: DataTypes.INTEGER
   }, {
     sequelize,

@@ -10,7 +10,14 @@
     <div class="container mt-3">
     <h1>Food</h1>
     <a href="/addProduct" class="btn btn-primary mb-3">Add Product</a>
-    <a href="/profile/<%= data %>" class="btn btn-danger">Profile</a>
+    <a href="/login" class="btn btn-primary mb-3">Login</a>
+    <a href="/profile/<%= data.id %>" class="btn btn-primary mb-3">Profile</a>
+    <a href="/login" class="btn btn-danger mb-3" style="margin-left: 30%;">Log Out</a>
+
+    <form class="example" action="/products" method="get" style="margin:auto;max-width:500px">
+      <input type="text" placeholder="Search by name" name="name">
+      <button type="submit" class="btn btn-info">Search</button>
+    </form>
 
     
     <div class="row" style="display: grid; grid-template-columns: auto auto auto auto; row-gap: 50px; margin-left: 30px;" >
@@ -20,7 +27,7 @@
             <img src="<%= el.imageURL %>">
             <div class="card-body">
               <h5 class="card-title"><%= el.name %></h5>
-              <p class="card-text">Price : <%= el.price %> </p>
+              <p class="card-text">Price : <%= formatRupiah(el.price) %> </p>
             </div>
             <div class="card-body">
               <a href="#" class="btn btn-primary">Add to cart</a>

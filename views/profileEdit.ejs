@@ -24,30 +24,49 @@
 </head>
 
 <body>
-    <form style="margin-left: 30%; margin-right: 35%;" action="/addProduct" method="post">
+    <form style="margin-left: 30%; margin-right: 35%;" action="/register" method="post">
 
      <div style="color: aliceblue;">
-        <div class="mb-3">
-            <label  style=" font-size: 150%; margin-top: 30%;" for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name">
-          </div>
-          <div class="mb-3">
-            <label  style=" font-size: 150%;" for="pprice" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" name="price">
-          </div>
-          <div class="mb-3">
-            <label  style=" font-size: 150%;" for="imageURL" class="form-label">Image</label>
-            <input type="text" class="form-control" id="imageURL" name="imageURL">
-          </div>
+   
+      <div class="mb-3" >
+        <label style="margin-top: 12%; font-size: 150%;" for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email">
+      </div>
+      <div class="mb-3">
+        <label  style=" font-size: 150%;" for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+      <div class="mb-3">
+        <label  style=" font-size: 150%;" for="address" class="form-label">Address</label><br>
+        <textarea style="width: 100%;" name="address" id="address" name="address"></textarea>
+      </div>
 
+        <label  style=" font-size: 150%;" for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" id="age" name="age">
+
+      
+        <div class="mb-3">
+          <label  style=" font-size: 150%;" for="role" class="form-label">Role</label>
+          <select class="form-select" name="role">
+            <option value="" selected disabled>Open this select menu</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+        </div>
+
+    
         <button type="submit" class="btn btn-danger">Submit</button>
-    </div>  
-    </form>    
+
+      </div>
+      </form>
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
    
-      </div>
         
 </body>
 

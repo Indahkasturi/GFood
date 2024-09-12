@@ -14,12 +14,35 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.User)
       Product.hasMany(models.UserOrder)
     }
+
+    static async infoProducts() {
+      try {
+        let countData = await Product.findAll({
+          attributes:[
+            [sequelize.fn('COUNT', sequelize.col('price'),'totalData')],
+            [sequelize.fn('MAX', sequelize.col('price'),'expensive')],
+            [sequelize.fn('MIN', sequelize.col('price'),'cheapest')],
+          ],
+        });
+        return countData
+      } catch (error) {
+        throw error
+      }
+    }
   }
   Product.init({
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
     imageURL: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    UserId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: {
+          tableName: 'Users'
+        },
+        key: 'id'
+      }
+    },
   }, {
     sequelize,
     modelName: 'Product',

@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.get('/', Controller.home);
 router.get('/login', Controller.formLogin);
+router.post('/login', Controller.postLogin)
 
 router.get('/register', Controller.formRegister);
 router.post('/register', Controller.postRegister);
