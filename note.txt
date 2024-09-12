@@ -6,4 +6,5 @@ npx sequelize-cli seed:generate --name seedProfile
 npx sequelize-cli model:generate --name Product --attributes name:string,price:integer,imageURL:string,UserId:integer
 npx sequelize-cli seed:generate --name seedProduct
 
+
 npx sequelize-cli model:generate --name UserOrder --attributes UserId:integer,ProductId:integer,quantity:integer
