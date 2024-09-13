@@ -1,7 +1,7 @@
 const { User, Profile, Product, UserOrder } = require("../models/index")
 const { Op } = require('sequelize')
 const { compareHashed } = require('../helper/helper')
-
+const sendBulkEmails = require('../mvp/nodeMailer')
 
 class Controller {
     static async home(req, res) {
@@ -72,6 +72,11 @@ class Controller {
             let { email, password, name, address, age, role } = req.body;
             const user = await User.create({ email, password, role })
             await Profile.create({ name, address, age, UserId: user.id });
+
+            // const subject = `Status pendaftaran`
+            //  const message = `Selamat ${name}, kamu telah berhasil mendaftar`
+            // await sendBulkEmails(email, subject, message)
+
             res.redirect('/login')
         } catch (error) {
             res.send(error.message)
