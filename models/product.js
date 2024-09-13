@@ -18,16 +18,20 @@ module.exports = (sequelize, DataTypes) => {
     static async infoProducts() {
       try {
         let countData = await Product.findAll({
-          attributes:[
-            [sequelize.fn('COUNT', sequelize.col('price'),'totalData')],
-            [sequelize.fn('MAX', sequelize.col('price'),'expensive')],
-            [sequelize.fn('MIN', sequelize.col('price'),'cheapest')],
+          attributes: [
+            [sequelize.fn('COUNT', sequelize.col('price'), 'totalData')],
+            [sequelize.fn('MAX', sequelize.col('price'), 'expensive')],
+            [sequelize.fn('MIN', sequelize.col('price'), 'cheapest')],
           ],
         });
         return countData
       } catch (error) {
         throw error
       }
+    }
+
+    formatRupiah(price) {
+      return price.toLocaleString("id-ID", { style: "currency", currency: "IDR" });
     }
   }
   Product.init({

@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const { hash } = require('../helper/helper')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -14,6 +16,16 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Profile)
       User.hasMany(models.Product)
       User.hasMany(models.UserOrder)
+    }
+    static async hash(pw) {
+      let salt = await bcrypt.genSalt(10);
+      let result = await bcrypt.hash(pw, salt);
+      return result
+    }
+
+    static async compare(pw, hashed) {
+      let result = await bcrypt.compare(pass, hashed);
+      return result;
     }
   }
   User.init({
@@ -32,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      
       validate: {
         notEmpty: {
           msg: 'Password is required'
@@ -55,7 +68,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     hooks:{
-      
+      beforeValidate: async (instance, option) => {
+        instance.password = await hash(instance.password);
+      }
     },
     sequelize,
     modelName: 'User',

@@ -1,6 +1,6 @@
 const { User, Profile, Product, UserOrder } = require("../models/index")
 const { Op } = require('sequelize')
-const { formatRupiah } = require('../helper/helper')
+const { compareHashed } = require('../helper/helper')
 
 
 class Controller {
@@ -26,15 +26,33 @@ class Controller {
     static async postLogin(req, res) {
         try {
             let { email, password } = req.body;
-            let data = await User.findAll({
-                where: { email, password }
-            })
-
-            if (data.length === 0) {
-                // res.send('duer')
-                throw new Error("username or password is incorrect");
-            }
-            res.send(data);
+            await User.findOne({ where: { email } })
+                .then(async data => {
+                    
+                    if (data) {
+                        const validatePassword = await compareHashed(password, data.password);
+                        
+                        
+                        if (validatePassword) {
+                            
+                            // console.log(req.session);
+                            req.session.userId = data.id
+                            console.log(data.id);
+                            
+                            return res.redirect('/products')
+                        
+                        } else {
+                            let errorMsg = "Incorrect email or password";
+                            return res.redirect(`/login?error=${errorMsg}`);
+                        }
+                    } else {
+                        let errorMsg = "Incorrect email or password";
+                        return res.redirect(`/login?error=${errorMsg}`);
+                    }
+                })
+                .catch(error => {
+                    res.send(error)
+                })
         } catch (error) {
             res.redirect(`/login?error=${error.message}`)
         }
@@ -78,7 +96,8 @@ class Controller {
             // res.send(data)
 
             // let rp = formatRupiah()
-            res.render('products', { data, formatRupiah, name })
+            let userId = req.session.userId
+            res.render('products', { data, name, userId })
         } catch (error) {
             res.send(error.message)
         }
@@ -108,28 +127,35 @@ class Controller {
     static async profile(req, res) {
         try {
             let { id } = req.params
-            let data = await Profile.findByPk(+id)
-            // res.send(' nama file view nya profile, isinya langsung form')
-            res.render('profileEdit', { data })
+            let data = await Profile.findOne({
+                where:{UserId: +id}
+            }) //{"id":1,"name":"saya","address":"Jakarta Barat","age":20,"UserId":1}
+            // res.send(data)
+            // id = +id
+            
+            res.render('profileEdit', { data, id })
         } catch (error) {
             res.send(error.message)
         }
     }
     static async postEditProfile(req, res) {
         try {
-            let { name, address, age } = req.body
+            
+            console.log(req.params);
             let { id } = req.params
+            
+            let { name, address, age } = req.body
             await Profile.update({ name, address, age }, { where: { id: +id } })
             let data = await Profile.findByPk(+id)
-            res.send(' /profile/:id');
-            // res.redirect('/profile/:id')
+            // res.send(error.message);
+            res.redirect(`/products`)
         } catch (error) {
             res.send(error.message)
         }
     }
     // *END Profile
 
-    // *START Profile
+    // *START Cart
     static async cart(req, res) {
         try {
             const buy = await UserOrder.findAll({
@@ -168,9 +194,9 @@ class Controller {
     static async deleteOrder(req, res) {
         try {
             let { id } = req.params
-            let deleteProfile = await Profile.findByPk(+id)
+            let deleteProfile = await Product.findByPk(+id)
 
-            await Profile.destroy({ where: { id: +id } })
+            await Product.destroy({ where: { id : +id} })
             res.redirect('/products')
             // res.send('Render ke "cart" ')
             // res.render('cart', {})

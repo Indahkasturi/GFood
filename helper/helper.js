@@ -1,5 +1,14 @@
-function formatRupiah(price) {
-    return price.toLocaleString("id-ID", { style: "currency", currency: "IDR" });
+const bcrypt = require('bcryptjs')
+
+async function hash(pw) {
+    const salt = await bcrypt.genSalt(10);
+    let result = await bcrypt.hash(pw, salt);
+    return result;
 }
 
-module.exports = { formatRupiah }
+async function compareHashed(pw, hashed) {
+    let result = await bcrypt.compare(pw, hashed);
+    return result;
+}
+
+module.exports = { hash, compareHashed }
