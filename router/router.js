@@ -22,7 +22,7 @@ router.use((req, res, next)=>{
         next()
     }
 })
-
+router.get('/logout', Controller.logout)
 router.get('/products', Controller.products);
 router.get('/addProduct', Controller.formAddProduct);
 router.post('/addProduct', Controller.postAddProduct)

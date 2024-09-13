@@ -220,5 +220,13 @@ class Controller {
         }
     }
     // *END Profile
+    static logout(req, res) {
+        req.session.destroy(err => {
+          if (err) {
+            return res.send('Error in logging out');
+          }
+          res.redirect('/');
+        });
+      }
 }
 module.exports = Controller
